@@ -15,7 +15,7 @@ public class Appointment {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			// Provide the correct details: DBServer/DBName, username, password
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/paf?useTimezone=true&serverTimezone=UTC",
+			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/hospital?useTimezone=true&serverTimezone=UTC",
 					"root", "");
 		} catch (Exception e) {
 			e.printStackTrace();

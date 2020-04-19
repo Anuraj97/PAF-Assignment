@@ -19,6 +19,7 @@ public class hospitalService {
 
 	hospital hosObj = new hospital();
 
+	// Read hospital Details
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML)
@@ -27,6 +28,7 @@ public class hospitalService {
 		return hosObj.readHospitalDetails();
 	}
 
+	// Insert hospital details
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -38,6 +40,7 @@ public class hospitalService {
 		return output;
 	}
 
+	// Update hospital details
 	@PUT
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -53,24 +56,24 @@ public class hospitalService {
 		String contact = hosObj1.get("contact").getAsString();
 		String email = hosObj1.get("email").getAsString();
 		String charge = hosObj1.get("charges").getAsString();
-		
-		String output = hosObj.updateHospitalDetails( hId, hName,  address,  contact,  email, charge);
+
+		String output = hosObj.updateHospitalDetails(hId, hName, address, contact, email, charge);
 		return output;
 	}
-	
+
+	// Delete hospital details
 	@DELETE
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String deleteHospitalDetails(String hosData)
-	{
-	//Convert the input string to an XML document
-	 org.jsoup.nodes.Document doc = Jsoup.parse(hosData, "", Parser.xmlParser());
+	public String deleteHospitalDetails(String hosData) {
+		// Convert the input string to an XML document
+		org.jsoup.nodes.Document doc = Jsoup.parse(hosData, "", Parser.xmlParser());
 
-	//Read the value from the element <itemID>
-	 String hosId = ((Element) doc).select("hId").text();
-	 String output = hosObj.deleteHospitalDetails(hosId);
-	return output;
+		// Read the value from the element <itemID>
+		String hosId = ((Element) doc).select("hId").text();
+		String output = hosObj.deleteHospitalDetails(hosId);
+		return output;
 	}
 
 }

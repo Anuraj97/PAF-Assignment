@@ -14,7 +14,7 @@ public class Payment {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// Provide the correct details: DBServer/DBName, username, password
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/paf?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -30,7 +30,7 @@ public class Payment {
 	 if (con == null)
 	 {return "Error while connecting to the database for inserting."; }
 	 // create a prepared statement
-	 String query = " insert into payment1(`PayID`,`pType`,`Nic`,`PaymentPrice`,`pDate`)"
+	 String query = " insert into payment(`PayID`,`pType`,`Nic`,`PaymentPrice`,`pDate`)"
 	 + " values (?, ?, ?, ?, ?)";
 	 PreparedStatement preparedStmt = con.prepareStatement(query);
 	 // binding values
@@ -62,7 +62,7 @@ public class Payment {
 	 {return "Error while connecting to the database for reading."; }
 	 // Prepare the html table to be displayed
 	 output = "<table border=\"1\"><tr><th>Payment Type</th><th>NIC</th><th>Price</th><th>Date</th><th>Update</th><th>Remove</th></tr>";
-	 String query = "select * from payment1";
+	 String query = "select * from payment";
 	 Statement stmt = (Statement) con.createStatement();
 	 ResultSet rs = ((java.sql.Statement) stmt).executeQuery(query);
 	 // iterate through the rows in the result set
@@ -108,7 +108,7 @@ public class Payment {
 		   return "Error while connecting to the database for updating."; } 
 	 
 	   // create a prepared statement    
-	   String query = "UPDATE payment1 SET pType=?,Nic=?,PaymentPrice=?,pDate=?"
+	   String query = "UPDATE payment SET pType=?,Nic=?,PaymentPrice=?,pDate=?"
 	   				+ "WHERE PayID=?"; 
 	 
 	   PreparedStatement preparedStmt = con.prepareStatement(query); 
@@ -147,7 +147,7 @@ public class Payment {
 		   return "Error while connecting to the database for deleting."; } 
 	 
 	   // create a prepared statement    
-	   String query = "delete from payment1 where PayID=?"; 
+	   String query = "delete from payment where PayID=?"; 
 	 
 	   PreparedStatement preparedStmt = con.prepareStatement(query); 
 	 
